@@ -7,6 +7,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+//    member variables to store reference locally
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
