@@ -16,18 +16,20 @@ public class Doctor {
     String mWebsite;
     double mRating;
     String mImageUrl;
-    ArrayList<String> mAddress = new ArrayList<>();
+    String mAddress;
     double mLatitude;
     double mLongitude;
-    ArrayList<String> mSpecialities = new ArrayList<>();
+    ArrayList<String> mSpecialties = new ArrayList<>();
+    String mGender;
+    String mBio;
 
     //    empty constructor needed by the Parceler library
     public Doctor() {
     }
 
     public Doctor(String name, String phone, String website,
-                  double rating, String imageUrl, double latitude, double longitude, ArrayList<String> address,
-                  ArrayList<String> specialities) {
+                  double rating, String imageUrl, double latitude, double longitude, String address,
+                  ArrayList<String> specialties, String gender, String bio) {
         this.mName = name;
         this.mPhone = phone;
         this.mWebsite = website;
@@ -37,7 +39,9 @@ public class Doctor {
         this.mAddress = address;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
-        this.mSpecialities = specialities;
+        this.mSpecialties = specialties;
+        this.mGender = gender;
+        this.mBio = bio;
     }
 
     public String getName() {
@@ -66,7 +70,7 @@ public class Doctor {
         return largeImageUrl;
     }
 
-    public ArrayList<String> getAddress() {
+    public String getAddress() {
         return mAddress;
     }
 
@@ -79,7 +83,15 @@ public class Doctor {
     }
 
     public ArrayList<String> getSpecialities() {
-        return mSpecialities;
+        return mSpecialties;
+    }
+
+    public String getGender() {
+        return mGender;
+    }
+
+    public String getBio() {
+        return mBio;
     }
 }
 

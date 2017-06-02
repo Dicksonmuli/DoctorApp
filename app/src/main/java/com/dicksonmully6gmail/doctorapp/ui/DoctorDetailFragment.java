@@ -71,7 +71,7 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
         mSpecilityLabel.setText(android.text.TextUtils.join(", ", mDoctor.getSpecialities()));
         mRatingLabel.setText(Double.toString(mDoctor.getRating()) + "/5");
         mPhoneLabel.setText(mDoctor.getPhone());
-        mAddressLabel.setText(android.text.TextUtils.join(", ", mDoctor.getAddress()));
+        mAddressLabel.setText(mDoctor.getAddress());
 
         mWebsiteLabel.setOnClickListener( this);
         mPhoneLabel.setOnClickListener(this);

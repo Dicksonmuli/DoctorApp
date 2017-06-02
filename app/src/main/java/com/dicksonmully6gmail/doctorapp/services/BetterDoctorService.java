@@ -43,7 +43,7 @@ import okhttp3.Response;
         }
         //        parse JSON data and return a list of doctors
         public ArrayList<Doctor> processResults(Response response) {
-            ArrayList<Doctor> restaurants = new ArrayList<>();
+            ArrayList<Doctor> doctors = new ArrayList<>();
 
             try {
                 String jsonData = response.body().string();
@@ -59,36 +59,34 @@ import okhttp3.Response;
                         String gender = doctorJSON.getJSONObject("profile").getString("gender");
                         String bio = doctorJSON.getJSONObject("profile").getString("bio");
 
-                        String phone = restaurantJSON.optString("display_phone", "Phone not available");
+
                         //website
                         JSONArray practicesJSON = doctorJSON.getJSONArray("practices");
                         String website = practicesJSON.getJSONObject(1).getString("website");
+                        //phone
+                        String phone = practicesJSON.getJSONObject(1).getJSONArray("phones")
+                                .getJSONObject(1)
+                                .optString("number", "Phone not available");
                         //lon lat
-                        String lat = practicesJSON.getJSONObject(1).getString("lat");
-                        String lon = practicesJSON.getJSONObject(1).getString("lon");
+                        double latitude = practicesJSON.getJSONObject(1).getDouble("lat");
+                        double longitude = practicesJSON.getJSONObject(1).getDouble("lon");
+                        //address
+                        String address = practicesJSON.getJSONObject(2).getString("state_long")
+                                + " " +  practicesJSON.getJSONObject(2).getString("street");
 
-                        double rating = restaurantJSON.getDouble("ratings");
-                        double latitude = restaurantJSON
-                                .getJSONObject("coordinates").getDouble("latitude");
-                        double longitude = restaurantJSON
-                                .getJSONObject("coordinates").getDouble("longitude");
+                        double rating = doctorJSON.getDouble("ratings");
 
                         ArrayList<String> specialties = new ArrayList<>();
-                        JSONArray specialtyJSON = doctorJSON.getJSONArray("specialties")
-                                .getJSONArray(2);
+                        JSONArray specialtyJSON = doctorJSON.getJSONArray("specialties");
                         for (int y = 0; y < specialtyJSON.length(); y++) {
-                            specialties.add(specialtyJSON.toString());
+                            specialties.add(specialtyJSON.getJSONObject(y).getString("description").toString());
                         }
 
-                        ArrayList<String> specialities = new ArrayList<>();
-                        JSONArray categoriesJSON = restaurantJSON.getJSONArray("categories");
 
-                        for (int y = 0; y < categoriesJSON.length(); y++) {
-                            categories.add(categoriesJSON.getJSONObject(y).getString("title").toString());
-                        }
-                        Doctor restaurant = new Doctor(name, phone, website, rating,
-                                imageUrl, latitude, longitude, address, categories);
-                        restaurants.add(restaurant);
+                        String name = first_name + " " + last_name;
+                        Doctor doctor = new Doctor(name, phone, website, rating,
+                                imageUrl, latitude, longitude, address, specialties, gender, bio);
+                        doctors.add(doctor);
                     }
                 }
             } catch (IOException e) {
@@ -96,6 +94,6 @@ import okhttp3.Response;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return restaurants;
+            return doctors;
         }
     }
