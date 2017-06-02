@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dicksonmully6gmail.doctorapp.R;
+import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
