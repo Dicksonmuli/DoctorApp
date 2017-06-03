@@ -27,7 +27,7 @@ import okhttp3.Response;
 
     public class BetterDoctorService {
         private static OkHttpClient client =  new OkHttpClient();
-        public static void findRestaurants(String location, Callback callback) {
+        public static void findDoctors(String location, Callback callback) {
 //
 //        HttpUrl class to construct the URL we'll send our request to
             HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.API_BASE_URL).newBuilder();

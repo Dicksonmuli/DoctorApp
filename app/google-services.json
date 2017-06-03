@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "364965248289",
+    "firebase_url": "https://myrestaurants-c705b.firebaseio.com",
+    "project_id": "myrestaurants-c705b",
+    "storage_bucket": "myrestaurants-c705b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364965248289:android:e9db4a7a59f531cd",
+        "android_client_info": {
+          "package_name": "com.dicksonmully6gmail.myrestaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364965248289-idk77552pk491frc7tin621aur196004.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAXsBQUoX0shC_1vT2lS73YSeF8iKqZiI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364965248289:android:d367c03e3178a2ea",
+        "android_client_info": {
+          "package_name": "com.dicksonmully6gmail.doctorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364965248289-idk77552pk491frc7tin621aur196004.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAXsBQUoX0shC_1vT2lS73YSeF8iKqZiI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
