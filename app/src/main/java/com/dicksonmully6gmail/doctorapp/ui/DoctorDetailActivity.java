@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dicksonmully6gmail.doctorapp.R;
+import com.dicksonmully6gmail.doctorapp.adapters.DoctorPagerAdapter;
+import com.dicksonmully6gmail.doctorapp.models.Doctor;
 
 import org.parceler.Parcels;
 

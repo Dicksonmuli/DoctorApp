@@ -2,6 +2,8 @@ package com.dicksonmully6gmail.doctorapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.R.attr.src;
+
 /**
  * Created by dickson on 6/2/17.
  */
@@ -29,6 +33,7 @@ import butterknife.ButterKnife;
 public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.DoctorViewHolder> {
     private static final int MAX_WIDTH = 150;
     private static final int MAX_HEIGHT = 150;
+    private static final float cornerRadius = 20;
     private ArrayList<Doctor> mDoctors = new ArrayList<>();
     private Context mContext;
 
@@ -78,15 +83,21 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
             mContext.startActivity(intent);
         }
 
-        public void bindDoctor(Doctor restaurant) {
+        public void bindDoctor(Doctor doctor) {
             Picasso.with(mContext)
-                    .load(restaurant.getImageUrl())
+                    .load(doctor.getImageUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)
                     .centerCrop()
+                    .placeholder(R.drawable.profile)
+                    .error(R.drawable.profile)
+                    .transform(new RoundedTransformation(50, 4))
+                    .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)
+                    .centerCrop()
                     .into(mDoctorImageView);
-            mNameTextView.setText(restaurant.getName());
-            mSpeciltyTextView.setText(restaurant.getSpecialties().get(0));
-            mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+
+            mNameTextView.setText(doctor.getName());
+            mSpeciltyTextView.setText(doctor.getSpecialties().get(0));
+            mRatingTextView.setText("Rating: " + doctor.getRating() + "/5");
         }
 
 

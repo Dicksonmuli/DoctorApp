@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import org.parceler.Parcels;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.R.attr.src;
+
 /**
  * Created by dickson on 6/2/17.
  */
@@ -28,7 +32,7 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
     private static final int MAX_HEIGHT = 300;
     @Bind(R.id.doctorImageView) ImageView mImageLabel;
     @Bind(R.id.doctorNameTextView) TextView mNameLabel;
-    @Bind(R.id.specialityTextView) TextView mSpecilityLabel;
+    @Bind(R.id.specialtyTextView) TextView mSpecilityLabel;
     @Bind(R.id.ratingTextView) TextView mRatingLabel;
     @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
     @Bind(R.id.phoneTextView) TextView mPhoneLabel;
@@ -37,8 +41,8 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
 
     private Doctor mDoctor;
 
-    public static DoctorDetailFragment newInstance(Doctor restaurant) {
-        //wrapping restaurant with parcels for serialization
+    public static DoctorDetailFragment newInstance(Doctor doctor) {
+        //wrapping doctor with parcels for serialization
         DoctorDetailFragment restaurantDetailFragment = new DoctorDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable("doctor", Parcels.wrap(doctor));
@@ -67,8 +71,9 @@ public class DoctorDetailFragment extends Fragment implements View.OnClickListen
                 .centerCrop()
                 .into(mImageLabel);
 
+
         mNameLabel.setText(mDoctor.getName());
-        mSpecilityLabel.setText(android.text.TextUtils.join(", ", mDoctor.getSpecialities()));
+        mSpecilityLabel.setText(android.text.TextUtils.join(", ", mDoctor.getSpecialties()));
         mRatingLabel.setText(Double.toString(mDoctor.getRating()) + "/5");
         mPhoneLabel.setText(mDoctor.getPhone());
         mAddressLabel.setText(mDoctor.getAddress());

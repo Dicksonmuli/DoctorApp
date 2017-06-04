@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.dicksonmully6gmail.doctorapp.Constants;
 import com.dicksonmully6gmail.doctorapp.R;
+import com.dicksonmully6gmail.doctorapp.adapters.DoctorListAdapter;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.services.BetterDoctorService;
 
@@ -47,17 +48,17 @@ public class DoctorListActivity extends AppCompatActivity {
         String location = intent.getStringExtra("location");
 //        mLocationTextView.setText("Here are all the restaurants near: " + location);
 
-        getRestaurants(location);
+        getDoctors(location);
 
 //        testing shared preferences
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, location);
         if (mRecentAddress != null) {
-            getRestaurants(mRecentAddress);
+            getDoctors(mRecentAddress);
         };
     }
     //callback method for req and res
-    private void getRestaurants(String location) {
+    private void getDoctors(String location) {
         final BetterDoctorService betterDoctorService = new BetterDoctorService();
         betterDoctorService.findDoctors(location, new Callback() {
             @Override
@@ -69,7 +70,7 @@ public class DoctorListActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
 //                calling runOnUiThread() method and override its run()
                 try {
-                    mDoctors = BetterDoctorService.processResults(response);
+                    mDoctors = betterDoctorService.processResults(response);
                 }catch (StringIndexOutOfBoundsException e) {
                     System.out.print("LOADING ....");
                 }
@@ -80,7 +81,7 @@ public class DoctorListActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        mAdapter = new DoctorListAdapeter(getApplicationContext(), mDoctors);
+                        mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager =
                                 new LinearLayoutManager(DoctorListActivity.this);

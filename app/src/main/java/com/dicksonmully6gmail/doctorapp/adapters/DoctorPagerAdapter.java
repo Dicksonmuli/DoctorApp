@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.dicksonmully6gmail.doctorapp.models.Doctor;
+import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailFragment;
+
 import java.util.ArrayList;
 
 /**
