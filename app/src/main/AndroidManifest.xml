@@ -31,7 +31,7 @@
             android:name=".ui.DoctorDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dicksonmully6gmail.doctorapp.ui.RestaurantDetailActivity">
+                android:value="com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity">
             </meta-data>
         </activity>
     </application>

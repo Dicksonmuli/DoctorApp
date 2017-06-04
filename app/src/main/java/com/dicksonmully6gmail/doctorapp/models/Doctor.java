@@ -82,7 +82,7 @@ public class Doctor {
         return mLongitude;
     }
 
-    public ArrayList<String> getSpecialities() {
+    public ArrayList<String> getSpecialties() {
         return mSpecialties;
     }
 

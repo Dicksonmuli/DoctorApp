@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.dicksonmully6gmail.doctorapp.R;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
+import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -45,24 +46,23 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
 
     @Override
     public void onBindViewHolder(DoctorListAdapter.DoctorViewHolder holder, int position) {
-        holder.bindRestaurant(mDoctors.get(position));
+        holder.bindDoctor(mDoctors.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mRestaurants.size();
+        return mDoctors.size();
     }
+//    doctor view holder class
     public class DoctorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        @Bind(R.id.restaurantImageView)
-        ImageView mRestaurantImageView;
-        @Bind(R.id.restaurantNameTextView)
-        TextView mNameTextView;
-        @Bind(R.id.categoryTextView) TextView mCategoryTextView;
+        @Bind(R.id.doctorImageView) ImageView mDoctorImageView;
+        @Bind(R.id.doctorNameTextView) TextView mNameTextView;
+        @Bind(R.id.specialtyTextView) TextView mSpeciltyTextView;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
 
         private Context mContext;
 
-        public RestaurantViewHolder(View itemView) {
+        public DoctorViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
@@ -72,20 +72,20 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+            Intent intent = new Intent(mContext, DoctorDetailActivity.class);
             intent.putExtra("position", itemPosition);
-            intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
+            intent.putExtra("doctors", Parcels.wrap(mDoctors));
             mContext.startActivity(intent);
         }
 
-        public void bindRestaurant(Restaurant restaurant) {
+        public void bindDoctor(Doctor restaurant) {
             Picasso.with(mContext)
                     .load(restaurant.getImageUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)
                     .centerCrop()
-                    .into(mRestaurantImageView);
+                    .into(mDoctorImageView);
             mNameTextView.setText(restaurant.getName());
-            mCategoryTextView.setText(restaurant.getCategories().get(0));
+            mSpeciltyTextView.setText(restaurant.getSpecialties().get(0));
             mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
         }
 
