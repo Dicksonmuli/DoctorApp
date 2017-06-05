@@ -43,4 +43,4 @@ public class RoundedTransformation implements com.squareup.picasso.Transformatio
     public String key() {
         return "rounded";
     }
-}g
+}

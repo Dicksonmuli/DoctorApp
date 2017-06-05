@@ -58,7 +58,7 @@
         android:ems="10"
         android:drawableLeft="@drawable/ic_edit_location_white_24dp"
         android:inputType="textPersonName"
-        android:text="Enter location" />
-
+        android:hint="Enter location" />
+`
 
 </RelativeLayout>

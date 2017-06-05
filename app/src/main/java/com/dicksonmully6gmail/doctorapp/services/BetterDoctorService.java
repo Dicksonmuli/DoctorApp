@@ -31,7 +31,7 @@ import okhttp3.Response;
 //
 //        HttpUrl class to construct the URL we'll send our request to
             HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.API_BASE_URL).newBuilder();
-            String url = urlBuilder.build().toString() + location + Constants.BETTER_DOCTOR_APPID + "key=" + Constants.BETTER_DOCTOR_API;
+            String url = urlBuilder.build().toString() + location + Constants.BETTER_DOCTOR_APPID + Constants.BETTER_DOCTOR_API;
 
 //       create request using the created url
             Request request= new Request.Builder()
@@ -62,19 +62,19 @@ import okhttp3.Response;
 
                         //website
                         JSONArray practicesJSON = doctorJSON.getJSONArray("practices");
-                        String website = practicesJSON.getJSONObject(1).getString("website");
+                        String website = practicesJSON.getJSONObject(0).getString("website");
                         //phone
-                        String phone = practicesJSON.getJSONObject(1).getJSONArray("phones")
-                                .getJSONObject(1)
+                        String phone = practicesJSON.getJSONObject(0).getJSONArray("phones")
+                                .getJSONObject(0)
                                 .optString("number", "Phone not available");
                         //lon lat
-                        double latitude = practicesJSON.getJSONObject(1).getDouble("lat");
-                        double longitude = practicesJSON.getJSONObject(1).getDouble("lon");
+                        double latitude = practicesJSON.getJSONObject(0).getDouble("lat");
+                        double longitude = practicesJSON.getJSONObject(0).getDouble("lon");
                         //address
-                        String address = practicesJSON.getJSONObject(2).getString("state_long")
-                                + " " +  practicesJSON.getJSONObject(2).getString("street");
+                        String address = practicesJSON.getJSONObject(0).getJSONObject("visit_address").optString("state_long", " ")
+                                + ", " +  practicesJSON.getJSONObject(0).getJSONObject("visit_address").optString("street", "No physical address");
 
-                        double rating = doctorJSON.getDouble("ratings");
+                        double rating = doctorJSON.optDouble("ratings", 0);
 
                         ArrayList<String> specialties = new ArrayList<>();
                         JSONArray specialtyJSON = doctorJSON.getJSONArray("specialties");

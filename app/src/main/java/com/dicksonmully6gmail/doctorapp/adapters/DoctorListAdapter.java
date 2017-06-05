@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.dicksonmully6gmail.doctorapp.R;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity;
+import com.dicksonmully6gmail.doctorapp.ui.RoundedTransformation;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -88,11 +89,9 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
                     .load(doctor.getImageUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)
                     .centerCrop()
-                    .placeholder(R.drawable.profile)
-                    .error(R.drawable.profile)
+                    .placeholder(R.drawable.background_doc)
+                    .error(R.drawable.background_doc)
                     .transform(new RoundedTransformation(50, 4))
-                    .resizeDimen(R.dimen.list_detail_image_size, R.dimen.list_detail_image_size)
-                    .centerCrop()
                     .into(mDoctorImageView);
 
             mNameTextView.setText(doctor.getName());

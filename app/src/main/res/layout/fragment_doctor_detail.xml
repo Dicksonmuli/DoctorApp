@@ -20,20 +20,20 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:paddingTop="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
                 android:paddingBottom="20dp">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:id="@+id/doctorImageView"
+                    android:src="@drawable/background_doc"
                     android:scaleType="centerCrop" />
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="200dp"
                     android:layout_height="150dp"
+                    android:paddingLeft="10dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                    >

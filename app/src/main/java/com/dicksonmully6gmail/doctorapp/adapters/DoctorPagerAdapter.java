@@ -14,25 +14,25 @@ import java.util.ArrayList;
  */
 
 public class DoctorPagerAdapter extends FragmentPagerAdapter {
-    private ArrayList<Doctor> mRestaurants;
+    private ArrayList<Doctor> mDoctors;
 
     public DoctorPagerAdapter(FragmentManager fm, ArrayList<Doctor> restaurants) {
         super(fm);
-        mRestaurants = restaurants;
+        mDoctors = restaurants;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return DoctorDetailFragment.newInstance(mRestaurants.get(position));
+        return DoctorDetailFragment.newInstance(mDoctors.get(position));
     }
 
     @Override
     public int getCount() {
-        return mRestaurants.size();
+        return mDoctors.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mRestaurants.get(position).getName();
+        return mDoctors.get(position).getName();
     }
 }

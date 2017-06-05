@@ -69,11 +69,7 @@ public class DoctorListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 //                calling runOnUiThread() method and override its run()
-                try {
                     mDoctors = betterDoctorService.processResults(response);
-                }catch (StringIndexOutOfBoundsException e) {
-                    System.out.print("LOADING ....");
-                }
 //
 //
                 DoctorListActivity.this.runOnUiThread(new Runnable() {

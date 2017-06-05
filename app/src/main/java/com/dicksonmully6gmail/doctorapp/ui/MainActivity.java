@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dicksonmully6gmail.doctorapp.Constants;
 import com.dicksonmully6gmail.doctorapp.R;
 
 import butterknife.Bind;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditor = mSharedPreferences.edit();
 
-        Typeface alexBrushFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Regular.ttf");
-        mAppNameTextView.setTypeface(alexBrushFont);
+        Typeface openSansRegular = Typeface.createFromAsset(getAssets(), "fonts/Black_Diamonds.ttf");
+        mAppNameTextView.setTypeface(openSansRegular);
 
 
 

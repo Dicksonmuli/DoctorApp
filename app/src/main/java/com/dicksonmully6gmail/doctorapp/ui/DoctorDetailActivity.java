@@ -30,8 +30,8 @@ public class DoctorDetailActivity extends AppCompatActivity{
         setContentView(R.layout.activity_doctor_detail);
         ButterKnife.bind(this);
 
-//        pull out our ArrayList<Restaurant> Parcelable using the unwrap() method
-        mDoctors = Parcels.unwrap(getIntent().getParcelableExtra("restaurants"));
+//        pull out our ArrayList<Doctor> Parcelable using the unwrap() method
+        mDoctors = Parcels.unwrap(getIntent().getParcelableExtra("doctors"));
         int startingPosition = getIntent().getIntExtra("position", 0);
 
 //        instructing ViewPager to use adapterViewPager adapter. And set the current item to the position of the item that was just clicked on
