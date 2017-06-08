@@ -3,6 +3,7 @@ package com.dicksonmully6gmail.doctorapp.models;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dickson on 6/2/17.
@@ -11,17 +12,17 @@ import java.util.ArrayList;
 @Parcel
 public class Doctor {
     // fields must be public
-    String mName;
-    String mPhone;
-    String mWebsite;
-    double mRating;
-    String mImageUrl;
-    String mAddress;
-    double mLatitude;
-    double mLongitude;
-    ArrayList<String> mSpecialties = new ArrayList<>();
-    String mGender;
-    String mBio;
+    String name;
+    String phone;
+    String website;
+    double rating;
+    String imageUrl;
+    String address;
+    double latitude;
+    double longitude;
+    List<String> specialties = new ArrayList<>();
+    String gender;
+    String bio;
 
     //    empty constructor needed by the Parceler library
     public Doctor() {
@@ -30,38 +31,38 @@ public class Doctor {
     public Doctor(String name, String phone, String website,
                   double rating, String imageUrl, double latitude, double longitude, String address,
                   ArrayList<String> specialties, String gender, String bio) {
-        this.mName = name;
-        this.mPhone = phone;
-        this.mWebsite = website;
-        this.mRating = rating;
-        this.mImageUrl = imageUrl;
+        this.name = name;
+        this.phone = phone;
+        this.website = website;
+        this.rating = rating;
+        this.imageUrl = imageUrl;
 //        mImageUrl = getLargeImageUrl(imageUrl);
-        this.mAddress = address;
-        this.mLatitude = latitude;
-        this.mLongitude = longitude;
-        this.mSpecialties = specialties;
-        this.mGender = gender;
-        this.mBio = bio;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.specialties = specialties;
+        this.gender = gender;
+        this.bio = bio;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public String getPhone() {
-        return mPhone;
+        return phone;
     }
 
     public String getWebsite() {
-        return mWebsite;
+        return website;
     }
 
     public double getRating() {
-        return mRating;
+        return rating;
     }
 
     public String getImageUrl() {
-        return mImageUrl;
+        return imageUrl;
     }
 
     //refactoring image getter method to retrieve high quality image
@@ -71,27 +72,27 @@ public class Doctor {
     }
 
     public String getAddress() {
-        return mAddress;
+        return address;
     }
 
     public double getLatitude() {
-        return mLatitude;
+        return latitude;
     }
 
     public double getLongitude() {
-        return mLongitude;
+        return longitude;
     }
 
-    public ArrayList<String> getSpecialties() {
-        return mSpecialties;
+    public List<String> getSpecialties() {
+        return specialties;
     }
 
     public String getGender() {
-        return mGender;
+        return gender;
     }
 
     public String getBio() {
-        return mBio;
+        return bio;
     }
 }
 
