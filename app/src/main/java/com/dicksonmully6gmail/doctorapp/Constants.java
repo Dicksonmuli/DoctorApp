@@ -10,4 +10,5 @@ public class Constants {
     public static final String BETTER_DOCTOR_APPID = ",100&skip=0&limit=10&user_key=";
     public static final String PREFERENCES_LOCATION_KEY = "location";
     public static final String FIREBASE_CHILD_SEARCHED_LOCATION = "searchedLocation";
+    public static final String FIREBASE_CHILD_DOCTORS = "doctors";
 }

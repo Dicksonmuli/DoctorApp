@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.dicksonmully6gmail.doctorapp.Constants;
 import com.dicksonmully6gmail.doctorapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,13 +23,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 //    member variables to store reference locally
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+//    private SharedPreferences mSharedPreferences;
+//    private SharedPreferences.Editor mEditor;
 
     // butterknife to make code DRY
     @Bind(R.id.findDoctorButton) Button mFindDoctorButton;
     @Bind(R.id.locationEditText) EditText mLocationEditText;
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
+    @Bind(R.id.savedDoctorsButton) Button mSavedDoctorsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mEditor = mSharedPreferences.edit();
 
         Typeface openSansRegular = Typeface.createFromAsset(getAssets(), "fonts/Black_Diamonds.ttf");
         mAppNameTextView.setTypeface(openSansRegular);
@@ -43,6 +49,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         mFindDoctorButton.setOnClickListener(this);
+        mSavedDoctorsButton.setOnClickListener(this);
+        mAuth = FirebaseAuth.getInstance();
+//        firebase authStateListener
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                //Welcome message
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName());
+                }else {
+
+                }
+            }
+        };
     }
 
     @Override
