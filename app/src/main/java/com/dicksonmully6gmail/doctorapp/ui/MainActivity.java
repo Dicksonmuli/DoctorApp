@@ -84,18 +84,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == mFindDoctorButton) {
                 String location = mLocationEditText.getText().toString();
-                if(!(location).equals("")) {
-                    addToSharedPreferences(location);
-                }
+//                if(!(location).equals("")) {
+//                    addToSharedPreferences(location);
+//                }
                 Intent intent = new Intent(MainActivity.this, DoctorListActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
 
 
         }
+        //saved doctor button onclick listener
+        if (v == mSavedDoctorsButton) {
+            Intent intent = new Intent(MainActivity.this, SavedDoctorListActivity.class);
+            startActivity(intent);
+        }
     }
     //a method  which takes the user-inputted zip code
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
-    }
+//    private void addToSharedPreferences(String location) {
+//        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+//    }
 }
