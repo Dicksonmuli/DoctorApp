@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * Created by dickson on 6/8/17.
  */
 
-public class FirebaseDoctorViewHolder extends RecyclerView implements View.OnClickListener{
+public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private static final int  MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 

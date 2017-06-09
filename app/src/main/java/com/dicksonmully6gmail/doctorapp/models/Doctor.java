@@ -23,6 +23,7 @@ public class Doctor {
     List<String> specialties = new ArrayList<>();
     String gender;
     String bio;
+    private  String pushId;
 
     //    empty constructor needed by the Parceler library
     public Doctor() {
@@ -93,6 +94,13 @@ public class Doctor {
 
     public String getBio() {
         return bio;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
 
