@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dicksonmully6gmail.doctorapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />d
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    d
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,28 +13,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppNoTheme">
-        <activity android:name=".ui.MainActivity">
-        </activity>
-        <activity
-            android:name=".ui.DoctorListActivity">
+        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.DoctorListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dicksonmully6gmail.doctorapp.ui.MainActivity">
-            </meta-data>
+                android:value="com.dicksonmully6gmail.doctorapp.ui.MainActivity"></meta-data>
         </activity>
-        <activity
-            android:name=".ui.DoctorDetailActivity">
+        <activity android:name=".ui.DoctorDetailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity">
-            </meta-data>
+                android:value="com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity"></meta-data>
         </activity>
         <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.CreateAccountActivity"></activity>
     </application>
 
 </manifest>
