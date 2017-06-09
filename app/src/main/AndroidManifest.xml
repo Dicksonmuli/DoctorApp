@@ -14,11 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppNoTheme">
         <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.DoctorListActivity">
@@ -33,6 +28,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity">
             </meta-data>
+        </activity>
+        <activity android:name=".ui.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

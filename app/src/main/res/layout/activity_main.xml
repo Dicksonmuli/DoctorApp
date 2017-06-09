@@ -30,15 +30,26 @@
 
     <Button
         android:id="@+id/findDoctorButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:layout_alignWithParentIfMissing="false"
-        android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
         android:background="@drawable/doc_search_button"
         android:text="Find Doctors" />
+    <Button
+        android:id="@+id/savedDoctorsButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_alignWithParentIfMissing="false"
+        android:textColor="#ffffff"
+        android:background="@drawable/doc_search_button"
+        android:text="Saved Doctors"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
     <ImageView
@@ -48,17 +59,7 @@
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/background_doc" />
 
-    <EditText
-        android:id="@+id/locationEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/findDoctorButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:ems="10"
-        android:drawableLeft="@drawable/ic_edit_location_white_24dp"
-        android:inputType="textPersonName"
-        android:hint="Enter location" />
+
 `
 
 </RelativeLayout>
