@@ -128,4 +128,8 @@ public class DoctorListActivity extends AppCompatActivity {
             }
         });
     }
+//    adding serached location to shared preferences
+    private void addToSharedPreferences(String location) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+    }
 }
