@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.dicksonmully6gmail.doctorapp.Constants;
 import com.dicksonmully6gmail.doctorapp.R;
@@ -30,6 +35,7 @@ import okhttp3.Response;
 public class DoctorListActivity extends AppCompatActivity {
 
     private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
     public static final String TAG = DoctorListActivity.class.getSimpleName();
 
@@ -56,6 +62,36 @@ public class DoctorListActivity extends AppCompatActivity {
         if (mRecentAddress != null) {
             getDoctors(mRecentAddress);
         };
+    }
+//    creting options menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            //            when the query is submitted
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                addToSharedPreferences(query);
+                getRestaurants(query);
+                return false;
+            }
+            //            when there is a noticable change on the search texteditor
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        return true;
     }
     //callback method for req and res
     private void getDoctors(String location) {
