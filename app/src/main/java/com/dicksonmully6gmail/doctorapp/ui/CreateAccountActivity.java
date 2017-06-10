@@ -95,11 +95,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         String password = mPasswordEditText.getText().toString().trim();
         String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
         mName = mNameEditText.getText().toString().trim();
+
         //calling methods when the user is being created
         boolean validEmail = isValidEmail(email);
         boolean validName = isValidName(mName);
         boolean validPassword = isValidPassword(password, confirmPassword);
-        if (!validEmail || ! validName || validPassword) return;
+        if (!validEmail || ! validName || !validPassword) return;
 
         mAuthProgressDialog.show();
 

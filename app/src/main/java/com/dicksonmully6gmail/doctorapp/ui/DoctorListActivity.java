@@ -81,7 +81,7 @@ public class DoctorListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 addToSharedPreferences(query);
-                getRestaurants(query);
+                getDoctors(query);
                 return false;
             }
             //            when there is a noticable change on the search texteditor
@@ -92,6 +92,10 @@ public class DoctorListActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
     //callback method for req and res
     private void getDoctors(String location) {

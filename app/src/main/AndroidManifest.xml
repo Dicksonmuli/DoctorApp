@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.CreateAccountActivity"></activity>
+        <activity android:name=".ui.SavedDoctorListActivity"></activity>
     </application>
 
 </manifest>

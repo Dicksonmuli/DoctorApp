@@ -139,12 +139,13 @@
             <Button
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Save"
-                android:id="@+id/saveRestaurantButton"
-                android:layout_alignParentBottom="true"
+                android:text="Save Doctor"
+                android:id="@+id/saveDoctorButton"
                 android:background="@color/colorAccentBlue"
                 android:textColor="@color/colorTextIcons"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
 
     </LinearLayout>
