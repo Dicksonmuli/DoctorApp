@@ -10,8 +10,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.dicksonmully6gmail.doctorapp.Constants;
+import com.dicksonmully6gmail.doctorapp.R;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity;
+import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailFragment;
 import com.dicksonmully6gmail.doctorapp.util.ItemTouchHelperAdapter;
 import com.dicksonmully6gmail.doctorapp.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -152,12 +154,12 @@ public class FirebaseDoctorListAdapter extends FirebaseRecyclerAdapter<Doctor, F
         mRef.removeEventListener(mChildEventListener);
     }
     private void createDetailFragment(int position) {
-        // Creates new RestaurantDetailFragment with the given position:
-        RestaurantDetailFragment detailFragment = RestaurantDetailFragment.newInstance(mRestaurants, position, Constants.SOURCE_SAVED);
+        // Creates new DoctorDetailFragment with the given position:
+        DoctorDetailFragment detailFragment = DoctorDetailFragment.newInstance(mDoctors, position, Constants.SOURCE_SAVED);
         // Gathers necessary components to replace the FrameLayout in the layout with the RestaurantDetailFragment:
         FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
         //  Replaces the FrameLayout with the RestaurantDetailFragment:
-        ft.replace(R.id.restaurantDetailContainer, detailFragment);
+        ft.replace(R.id.doctorDetailContainer, detailFragment);
         // Commits these changes:
         ft.commit();
     }
