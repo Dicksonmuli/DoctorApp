@@ -90,6 +90,7 @@ public class FirebaseDoctorListAdapter extends FirebaseRecyclerAdapter<Doctor, F
         }
 
         //setting ontouch listener on mdoctorImageView
+        viewHolder.
         viewHolder.doctorImageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

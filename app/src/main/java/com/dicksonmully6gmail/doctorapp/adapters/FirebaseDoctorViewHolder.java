@@ -33,6 +33,8 @@ import java.util.ArrayList;
 public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder{
     private static final int  MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+    //declaring imageView public so as to grant access to adapter to enable drag & drop
+    public ImageView mDoctorImageView;
 
     View mView;
     Context mContext;
@@ -45,7 +47,7 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
     }
 //    bind doctor views
     public void bindDoctor(Doctor doctor) {
-        ImageView doctorImageView = (ImageView) mView.findViewById(R.id.doctorImageView);
+        mDoctorImageView = (ImageView) mView.findViewById(R.id.doctorImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.doctorNameTextView);
         TextView specialtyTextView = (TextView) mView.findViewById(R.id.specialtyTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
