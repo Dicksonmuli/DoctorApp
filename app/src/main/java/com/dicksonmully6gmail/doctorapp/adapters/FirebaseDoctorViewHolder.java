@@ -40,21 +40,25 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         itemView.setOnClickListener(this);
     }
 //    bind doctor views
-    public void bindDoctor(Doctor restaurant) {
+    public void bindDoctor(Doctor doctor) {
         ImageView doctorImageView = (ImageView) mView.findViewById(R.id.doctorImageView);
-        TextView nameTextView = (TextView) mView.findViewById(R.id.restaurantNameTextView);
+        TextView nameTextView = (TextView) mView.findViewById(R.id.doctorNameTextView);
         TextView specialtyTextView = (TextView) mView.findViewById(R.id.specialtyTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
 
         Picasso.with(mContext)
-                .load(restaurant.getImageUrl())
+                .load(doctor.getImageUrl())
                 .resize(MAX_WIDTH, MAX_HEIGHT)
                 .centerCrop()
                 .into(doctorImageView);
 
-        nameTextView.setText(restaurant.getName());
-        specialtyTextView.setText(restaurant.getSpecialties().get(0));
-        ratingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+        try {
+            nameTextView.setText(doctor.getName());
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        specialtyTextView.setText(doctor.getSpecialties().get(0));
+        ratingTextView.setText("Rating: " + doctor.getRating() + "/5");
 
     }
 //    adding value event listener on onclick
