@@ -3,6 +3,8 @@ package com.dicksonmully6gmail.doctorapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +14,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dicksonmully6gmail.doctorapp.Constants;
 import com.dicksonmully6gmail.doctorapp.R;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity;
+import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailFragment;
 import com.dicksonmully6gmail.doctorapp.ui.RoundedTransformation;
 import com.dicksonmully6gmail.doctorapp.util.OnDoctorSelectedListener;
 import com.squareup.picasso.Picasso;
@@ -94,6 +98,17 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
                 createDetailFragment(0);
             }
         }
+    // Takes position of doctor in list as parameter:
+    private void createDetailFragment(int position) {
+        // Creates new DoctorDetailFragment with the given position:
+        DoctorDetailFragment detailFragment = DoctorDetailFragment.newInstance(mDoctors, position, Constants.SOURCE_FIND);
+        // Gathers necessary components to replace the FrameLayout in the layout with the RestaurantDetailFragment:
+        FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+        //  Replaces the FrameLayout with the DoctorDetailFragment:
+        ft.replace(R.id.doctorDetailContainer, detailFragment);
+        // Commits these changes:
+        ft.commit();
+    }
         //        creates an intent to navigate to our RestaurantDetailActivity
         @Override
         public void onClick(View v) {
