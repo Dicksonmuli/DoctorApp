@@ -18,6 +18,7 @@ import com.dicksonmully6gmail.doctorapp.R;
 import com.dicksonmully6gmail.doctorapp.adapters.DoctorListAdapter;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.services.BetterDoctorService;
+import com.dicksonmully6gmail.doctorapp.util.OnDoctorSelectedListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ import okhttp3.Response;
  * Created by dickson on 6/2/17.
  */
 
-public class DoctorListActivity extends AppCompatActivity {
-
+public class DoctorListActivity extends AppCompatActivity implements OnDoctorSelectedListener {
+    //refactoring doctor list - moving its contes to DoctorListFragment
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
@@ -43,6 +44,8 @@ public class DoctorListActivity extends AppCompatActivity {
     private DoctorListAdapter mAdapter;
     //
     public ArrayList<Doctor> mDoctors = new ArrayList<>();
+    private Intent mPosition;
+    String mSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
