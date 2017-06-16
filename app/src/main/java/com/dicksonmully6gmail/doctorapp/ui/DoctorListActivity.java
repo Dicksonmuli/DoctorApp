@@ -2,6 +2,7 @@ package com.dicksonmully6gmail.doctorapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
@@ -20,6 +21,8 @@ import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.services.BetterDoctorService;
 import com.dicksonmully6gmail.doctorapp.util.OnDoctorSelectedListener;
 
+import org.parceler.Parcels;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,108 +38,54 @@ import okhttp3.Response;
 
 public class DoctorListActivity extends AppCompatActivity implements OnDoctorSelectedListener {
     //refactoring doctor list - moving its contes to DoctorListFragment
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private String mRecentAddress;
-    public static final String TAG = DoctorListActivity.class.getSimpleName();
 
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
-    private DoctorListAdapter mAdapter;
-    //
     public ArrayList<Doctor> mDoctors = new ArrayList<>();
-    private Intent mPosition;
+    private Integer mPosition;
     String mSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctors);
 //
-        ButterKnife.bind(this);
+        if (savedInstanceState != null) {
 
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
-//        mLocationTextView.setText("Here are all the restaurants near: " + location);
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                mPosition = savedInstanceState.getInt(Constants.EXTRA_KEY_POSITION);
+                mDoctors = Parcels.unwrap(savedInstanceState.getParcelable(Constants.EXTRA_KEY_RESTAURANTS));
+                mSource = savedInstanceState.getString(Constants.KEY_SOURCE);
 
-        getDoctors(location);
+                if (mPosition != null && mDoctors != null) {
+                    Intent intent = new Intent(this, DoctorDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);
+                    intent.putExtra(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(mDoctors));
+                    intent.putExtra(Constants.KEY_SOURCE, mSource);
+                    startActivity(intent);
+                }
 
-//        testing shared preferences
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, location);
-        if (mRecentAddress != null) {
-            getDoctors(mRecentAddress);
-        };
-    }
-//    creting options menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        ButterKnife.bind(this);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
-
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            //            when the query is submitted
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                addToSharedPreferences(query);
-                getDoctors(query);
-                return false;
             }
-            //            when there is a noticable change on the search texteditor
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
 
-        return true;
+        }
     }
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (mPosition != null && mDoctors != null) {
+            outState.putInt(Constants.EXTRA_KEY_POSITION, mPosition);
+            outState.putParcelable(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(mDoctors));
+            outState.putString(Constants.KEY_SOURCE, mSource);
+        }
+
     }
-    //callback method for req and res
-    private void getDoctors(String location) {
-        final BetterDoctorService betterDoctorService = new BetterDoctorService();
-        betterDoctorService.findDoctors(location, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-            //overriding onResponse and save data in logcat(for now)
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-//                calling runOnUiThread() method and override its run()
-                    mDoctors = betterDoctorService.processResults(response);
-//
-//
-                DoctorListActivity.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        mAdapter = new DoctorListAdapter(getApplicationContext(), mDoctors);
-                        mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(DoctorListActivity.this);
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
-
-                    }
-
-                });
 
 
-            }
-        });
+    //overriding interface
+    @Override
+    public void onRestaurantSelected(Integer position, ArrayList<Doctor> restaurants, String source) {
+        mPosition = position;
+        mDoctors = restaurants;
+        mSource = source;
+
     }
-//    adding serached location to shared preferences
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
-    }
+
 }

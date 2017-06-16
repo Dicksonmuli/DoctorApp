@@ -23,52 +23,15 @@ import butterknife.ButterKnife;
  */
 
 public class SavedDoctorListActivity extends AppCompatActivity  {
-    private DatabaseReference mDoctorReference;
-    private FirebaseRecyclerAdapter mFirebaseAdapter;
 
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    //refactoring this activity to a fragment
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_doctors);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_saved_doctor_list);
 
-        /** getting current user by user id
-         * in order to display "Saved Restaurants" list
-         * associated with the user currently logged in
-         */
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
 
-        mDoctorReference = FirebaseDatabase
-                .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_DOCTORS)
-                .child(uid);
-        setUpFirebaseAdapter();
-
-    }
-    private void setUpFirebaseAdapter() {
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Doctor, FirebaseDoctorViewHolder>
-                (Doctor.class, R.layout.doctor_list_item, FirebaseDoctorViewHolder.class,
-                        mDoctorReference) {
-
-            @Override
-            protected void populateViewHolder(FirebaseDoctorViewHolder viewHolder,
-                                              Doctor model, int position) {
-                viewHolder.bindDoctor(model);
-            }
-        };
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.cleanup();
     }
 }

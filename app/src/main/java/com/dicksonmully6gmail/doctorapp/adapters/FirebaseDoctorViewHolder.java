@@ -1,8 +1,11 @@
 package com.dicksonmully6gmail.doctorapp.adapters;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +14,7 @@ import com.dicksonmully6gmail.doctorapp.Constants;
 import com.dicksonmully6gmail.doctorapp.R;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity;
+import com.dicksonmully6gmail.doctorapp.util.ItemTouchHelperViewHolder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +30,7 @@ import java.util.ArrayList;
  * Created by dickson on 6/8/17.
  */
 
-public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder{
     private static final int  MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 
@@ -37,7 +41,7 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
+//        itemView.setOnClickListener(this);
     }
 //    bind doctor views
     public void bindDoctor(Doctor doctor) {
@@ -61,30 +65,57 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
         ratingTextView.setText("Rating: " + doctor.getRating() + "/5");
 
     }
-//    adding value event listener on onclick
     @Override
-    public void onClick(View v) {
-        final ArrayList<Doctor> doctors = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_DOCTORS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    doctors.add(snapshot.getValue(Doctor.class));
-                }
-                int itemPosition = getLayoutPosition();
+    public void onItemSelected() {
+        //programmatic approach of animation
+//        itemView.animate()
+//                .alpha(0.7f)
+//                .scaleX(0.9f)
+//                .scaleY(0.9f)
+//                .setDuration(500);
 
-                Intent intent = new Intent(mContext, DoctorDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("doctors", Parcels.wrap(doctors));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        //xml animation resources
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.drag_scale_on);
+        set.setTarget(itemView);
+        set.start();
     }
+
+    @Override
+    public void onItemClear() {
+        //programmatic approach of animation
+//       itemView.animate()
+//               .alpha(1f)
+//               .scaleX(1f)
+//               .scaleY(1f);
+        //xml animation resources
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.drag_scale_off);
+        set.setTarget(itemView);
+        set.start();
+    }
+//    adding value event listener on onclick
+//    @Override
+//    public void onClick(View v) {
+//        final ArrayList<Doctor> doctors = new ArrayList<>();
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_DOCTORS);
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    doctors.add(snapshot.getValue(Doctor.class));
+//                }
+//                int itemPosition = getLayoutPosition();
+//
+//                Intent intent = new Intent(mContext, DoctorDetailActivity.class);
+//                intent.putExtra("position", itemPosition + "");
+//                intent.putExtra("doctors", Parcels.wrap(doctors));
+//
+//                mContext.startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 }
