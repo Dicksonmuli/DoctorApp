@@ -56,7 +56,7 @@ public class FirebaseDoctorViewHolder extends RecyclerView.ViewHolder implements
                 .load(doctor.getImageUrl())
                 .resize(MAX_WIDTH, MAX_HEIGHT)
                 .centerCrop()
-                .into(doctorImageView);
+                .into(mDoctorImageView);
 
         try {
             nameTextView.setText(doctor.getName());

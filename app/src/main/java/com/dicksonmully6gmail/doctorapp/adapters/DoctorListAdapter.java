@@ -34,7 +34,6 @@ import static android.R.attr.src;
 public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.DoctorViewHolder> {
     private static final int MAX_WIDTH = 150;
     private static final int MAX_HEIGHT = 150;
-    private static final float cornerRadius = 20;
     private ArrayList<Doctor> mDoctors = new ArrayList<>();
     private Context mContext;
 

@@ -15,15 +15,18 @@ import java.util.ArrayList;
 
 public class DoctorPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Doctor> mDoctors;
+    private String mSourcce;
 
-    public DoctorPagerAdapter(FragmentManager fm, ArrayList<Doctor> restaurants) {
+    public DoctorPagerAdapter(FragmentManager fm, ArrayList<Doctor> restaurants, String source
+    ) {
         super(fm);
         mDoctors = restaurants;
+        mSourcce = source;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return DoctorDetailFragment.newInstance(mDoctors.get(position));
+        return DoctorDetailFragment.newInstance(mDoctors, position, mSourcce);
     }
 
     @Override
