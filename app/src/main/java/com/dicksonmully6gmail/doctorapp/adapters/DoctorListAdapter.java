@@ -113,10 +113,16 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, DoctorDetailActivity.class);
-            intent.putExtra("position", itemPosition);
-            intent.putExtra("doctors", Parcels.wrap(mDoctors));
-            mContext.startActivity(intent);
+            mDoctorSelectedListener.onRestaurantSelected(itemPosition, mDoctors, Constants.SOURCE_FIND);
+            if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                createDetailFragment(itemPosition);
+            } else {
+                Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
+                intent.putExtra(Constants.EXTRA_KEY_DOCTORS, Parcels.wrap(mDoctors));
+                intent.putExtra(Constants.KEY_SOURCE, Constants.SOURCE_FIND);
+                mContext.startActivity(intent);
+            }
         }
 
         public void bindDoctor(Doctor doctor) {

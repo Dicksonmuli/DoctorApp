@@ -24,6 +24,7 @@ public class Doctor {
     String gender;
     String bio;
     private  String pushId;
+    String index;
 
     //    empty constructor needed by the Parceler library
     public Doctor() {
@@ -44,6 +45,7 @@ public class Doctor {
         this.specialties = specialties;
         this.gender = gender;
         this.bio = bio;
+        this.index = "not_specified";
     }
 
     public String getName() {
@@ -101,6 +103,12 @@ public class Doctor {
     }
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+    public String getIndex() {
+        return index;
+    }
+    public void setIndex(String index) {
+        this.index = index;
     }
 }
 
