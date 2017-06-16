@@ -2,6 +2,7 @@ package com.dicksonmully6gmail.doctorapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
@@ -72,13 +73,26 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
         @Bind(R.id.specialtyTextView) TextView mSpeciltyTextView;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
 
+        private int mOrientation;
+        private ArrayList<Doctor> mDoctors = new ArrayList<>();
         private Context mContext;
+        private OnDoctorSelectedListener mDoctorSelectedListener;
 
-        public DoctorViewHolder(View itemView) {
+        public DoctorViewHolder(View itemView, ArrayList<Doctor> doctors,
+                                OnDoctorSelectedListener doctorSelectedListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
             itemView.setOnClickListener(this);
+            //Determines the current orientation of the device:
+            mOrientation = itemView.getResources().getConfiguration().orientation;
+            // Checks if the recorded orientation matches Android's landscape configuration.
+            // if so, we create a new DetailFragment to display in our special landscape layout:
+            mDoctors = doctors;
+            mDoctorSelectedListener = doctorSelectedListener;
+            if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                createDetailFragment(0);
+            }
         }
         //        creates an intent to navigate to our RestaurantDetailActivity
         @Override
