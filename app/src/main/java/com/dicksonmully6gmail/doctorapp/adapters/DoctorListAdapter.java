@@ -15,6 +15,7 @@ import com.dicksonmully6gmail.doctorapp.R;
 import com.dicksonmully6gmail.doctorapp.models.Doctor;
 import com.dicksonmully6gmail.doctorapp.ui.DoctorDetailActivity;
 import com.dicksonmully6gmail.doctorapp.ui.RoundedTransformation;
+import com.dicksonmully6gmail.doctorapp.util.OnDoctorSelectedListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -36,10 +37,16 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.Do
     private static final int MAX_HEIGHT = 150;
     private ArrayList<Doctor> mDoctors = new ArrayList<>();
     private Context mContext;
+    //a member variable for doctor selected listener
+    private OnDoctorSelectedListener mOnDoctorSelectedListener;
 
-    public DoctorListAdapter(Context context, ArrayList<Doctor> doctors) {
+    //constructor
+    public DoctorListAdapter(Context context,
+                             ArrayList<Doctor> doctors,
+                             OnDoctorSelectedListener doctorSelectedListener) {
         mContext = context;
         mDoctors = doctors;
+        mOnDoctorSelectedListener = doctorSelectedListener;
     }
 
     @Override
